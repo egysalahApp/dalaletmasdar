@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تطبيقات تفاعلية: دلالات المصادر الثلاثية</title>
+    <title>تطبيقات تفاعلية: دلالات المصادر الثلاثية | إعداد محمود صلاح</title>
     <!-- استدعاء خط نوتو نسخ عربي من جوجل -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,9 +12,11 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
+            /* تطبيق الخط وتكبير حجمه ليكون واضحاً جداً */
             font-family: 'Noto Naskh Arabic', serif;
-            background-color: #ffffff; /* خلفية بيضاء كما هو مطلوب */
-            color: #111827; /* لون خط داكن وواضح */
+            font-size: 1.25rem; 
+            background-color: #ffffff; /* خلفية بيضاء */
+            color: #111827; /* لون داكن للخطوط لضمان الوضوح */
         }
         .tab-content {
             display: none;
@@ -24,7 +26,7 @@
             display: block;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(15px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .correct-answer {
@@ -40,121 +42,139 @@
         .btn-option {
             transition: all 0.2s;
         }
-        .btn-option:hover {
+        .btn-option:hover:not(:disabled) {
             background-color: #f3f4f6;
         }
-        /* تصميم مخصص لقائمة التصنيف */
+        /* تصميم صندوق التصنيف */
         .category-box {
-            min-height: 100px;
-            border: 2px dashed #cbd5e1;
+            min-height: 120px;
+            border: 2px dashed #94a3b8;
             transition: all 0.3s;
-        }
-        .category-box.drag-over {
-            background-color: #f0fdf4;
-            border-color: #22c55e;
         }
         .word-item {
             cursor: pointer;
             user-select: none;
+            transition: transform 0.1s;
+        }
+        .word-item:active {
+            transform: scale(0.95);
         }
     </style>
 </head>
-<body class="bg-white antialiased min-h-screen pb-12">
+<body class="antialiased min-h-screen pb-16">
 
     <!-- الترويسة العلوية -->
-    <header class="bg-blue-50 py-8 border-b-4 border-blue-600 mb-8 text-center shadow-sm">
+    <header class="bg-blue-50 py-10 border-b-4 border-blue-600 mb-10 text-center shadow-sm">
         <div class="max-w-4xl mx-auto px-4">
-            <h1 class="text-4xl font-bold text-blue-900 mb-4 leading-tight">تدريبات تفاعلية: دلالات المصادر الثلاثية</h1>
-            <div class="inline-block bg-white px-6 py-2 rounded-full shadow-sm border border-blue-100">
-                <p class="text-xl font-semibold text-blue-800">إعداد/ محمود صلاح</p>
-                <p class="text-lg text-blue-600 font-medium">العربية السهلة</p>
+            <h1 class="text-4xl md:text-5xl font-bold text-blue-900 mb-6 leading-tight">تدريبات تفاعلية: دلالات المصادر الثلاثية</h1>
+            <div class="inline-block bg-white px-8 py-3 rounded-2xl shadow border border-blue-200">
+                <p class="text-2xl font-bold text-gray-800 mb-2">إعداد/ محمود صلاح</p>
+                <a href="https://www.youtube.com/egysalah" target="_blank" rel="noopener noreferrer" class="text-xl text-blue-600 font-bold hover:text-blue-800 hover:underline transition duration-300 inline-flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-600" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                    العربية السهلة
+                </a>
             </div>
         </div>
     </header>
 
     <main class="max-w-5xl mx-auto px-4">
         <!-- ملخص سريع للدرس -->
-        <section class="bg-gray-50 p-6 rounded-xl border border-gray-200 mb-8 shadow-sm">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4 border-b-2 border-gray-300 pb-2">تذكير سريع بالقاعدة:</h2>
-            <p class="text-lg text-gray-700 leading-relaxed mb-4">
-                المصادر الثلاثية تأتي على أوزان تدل على معانٍ محددة، منها:
+        <section class="bg-gray-50 p-6 md:p-8 rounded-2xl border border-gray-200 mb-10 shadow-sm">
+            <h2 class="text-3xl font-bold text-gray-800 mb-6 border-b-2 border-gray-300 pb-3">تذكير سريع بالقاعدة:</h2>
+            <p class="text-xl text-gray-700 leading-relaxed mb-6">
+                المصادر الثلاثية القياسية تأتي غَالِبًا على أوزان تدل على معانٍ محددة، منها:
             </p>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-base">
-                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 text-center"><span class="font-bold text-blue-700">حرفة:</span> فِعَالَة (زِرَاعَة)</div>
-                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 text-center"><span class="font-bold text-blue-700">حركة واضطراب:</span> فَعَلَان (غَلَيَان)</div>
-                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 text-center"><span class="font-bold text-blue-700">مرض:</span> فُعَال (زُكَام)</div>
-                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 text-center"><span class="font-bold text-blue-700">صوت:</span> فُعَال / فَعِيل (صُرَاخ / زَئِير)</div>
-                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 text-center"><span class="font-bold text-blue-700">لون:</span> فُعْلَة (حُمْرَة)</div>
-                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 text-center"><span class="font-bold text-blue-700">امتناع:</span> فِعَال (إِبَاء)</div>
-                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 text-center"><span class="font-bold text-blue-700">عيب:</span> فَعَل (عَرَج)</div>
-                <div class="bg-white p-3 rounded shadow-sm border border-gray-100 text-center"><span class="font-bold text-blue-700">سير:</span> فَعِيل (رَحِيل)</div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-lg">
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center"><span class="font-bold text-blue-700 block mb-1">حرفة:</span> فِعَالَة (زِرَاعَة)</div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center"><span class="font-bold text-blue-700 block mb-1">حركة واضطراب:</span> فَعَلَان (غَلَيَان)</div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center"><span class="font-bold text-blue-700 block mb-1">مرض:</span> فُعَال (زُكَام)</div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center"><span class="font-bold text-blue-700 block mb-1">صوت:</span> فُعَال / فَعِيل (صُرَاخ/زَئِير)</div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center"><span class="font-bold text-blue-700 block mb-1">لون:</span> فُعْلَة (حُمْرَة)</div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center"><span class="font-bold text-blue-700 block mb-1">امتناع:</span> فِعَال (إِبَاء)</div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center"><span class="font-bold text-blue-700 block mb-1">عيب:</span> فَعَل (عَرَج)</div>
+                <div class="bg-white p-4 rounded-xl shadow-sm border border-gray-200 text-center"><span class="font-bold text-blue-700 block mb-1">سير:</span> فَعِيل (رَحِيل)</div>
             </div>
         </section>
 
         <!-- أزرار التنقل بين التدريبات -->
-        <div class="flex flex-wrap justify-center gap-4 mb-8">
-            <button onclick="showTab('tab-mcq')" class="tab-btn active bg-blue-600 text-white px-6 py-3 rounded-lg font-bold text-lg shadow hover:bg-blue-700 transition" id="btn-mcq">اختيار من متعدد</button>
-            <button onclick="showTab('tab-classify')" class="tab-btn bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-bold text-lg shadow hover:bg-gray-300 transition" id="btn-classify">صنّف المصادر</button>
-            <button onclick="showTab('tab-match')" class="tab-btn bg-gray-200 text-gray-800 px-6 py-3 rounded-lg font-bold text-lg shadow hover:bg-gray-300 transition" id="btn-match">نشاط التوصيل</button>
+        <div class="flex flex-wrap justify-center gap-4 mb-10">
+            <button onclick="showTab('tab-mcq')" class="tab-btn active bg-blue-600 text-white px-6 py-4 rounded-xl font-bold text-xl shadow-md hover:bg-blue-700 transition" id="btn-mcq">اختيار من متعدد</button>
+            <button onclick="showTab('tab-tf')" class="tab-btn bg-gray-100 text-gray-800 border-2 border-gray-200 px-6 py-4 rounded-xl font-bold text-xl shadow-sm hover:bg-gray-200 transition" id="btn-tf">صح أم خطأ</button>
+            <button onclick="showTab('tab-classify')" class="tab-btn bg-gray-100 text-gray-800 border-2 border-gray-200 px-6 py-4 rounded-xl font-bold text-xl shadow-sm hover:bg-gray-200 transition" id="btn-classify">صنّف المصادر</button>
+            <button onclick="showTab('tab-match')" class="tab-btn bg-gray-100 text-gray-800 border-2 border-gray-200 px-6 py-4 rounded-xl font-bold text-xl shadow-sm hover:bg-gray-200 transition" id="btn-match">نشاط التوصيل</button>
         </div>
 
         <!-- التدريب الأول: اختيار من متعدد -->
         <div id="tab-mcq" class="tab-content active">
-            <div class="bg-white p-6 rounded-xl border-2 border-blue-100 shadow-md">
-                <h2 class="text-2xl font-bold text-blue-800 mb-6 text-center">التدريب الأول: اختر الإجابة الصحيحة</h2>
+            <div class="bg-white p-6 md:p-10 rounded-2xl border border-gray-200 shadow-lg">
+                <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">التدريب الأول: اختر الإجابة الصحيحة</h2>
                 <div id="mcq-container" class="space-y-8">
                     <!-- سيتم حقن الأسئلة هنا بواسطة جافاسكريبت -->
                 </div>
-                <div class="mt-8 text-center">
-                    <button onclick="checkMCQ()" class="bg-green-600 text-white px-8 py-3 rounded-lg font-bold text-xl shadow hover:bg-green-700 transition">تحقق من الإجابات</button>
+                <div class="mt-10 text-center">
+                    <button onclick="checkMCQ()" class="bg-green-600 text-white px-10 py-4 rounded-xl font-bold text-2xl shadow-md hover:bg-green-700 transition">تحقق من الإجابات</button>
                 </div>
-                <div id="mcq-result" class="mt-6 text-center text-2xl font-bold hidden p-4 rounded-lg"></div>
+                <div id="mcq-result" class="mt-8 text-center text-3xl font-bold hidden p-6 rounded-xl"></div>
             </div>
         </div>
 
-        <!-- التدريب الثاني: التصنيف -->
+        <!-- التدريب الثاني: صح أم خطأ -->
+        <div id="tab-tf" class="tab-content">
+            <div class="bg-white p-6 md:p-10 rounded-2xl border border-gray-200 shadow-lg">
+                <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">التدريب الثاني: صح أم خطأ</h2>
+                <div id="tf-container" class="space-y-6">
+                    <!-- سيتم حقن الأسئلة هنا -->
+                </div>
+                <div class="mt-10 text-center">
+                    <button onclick="checkTF()" class="bg-green-600 text-white px-10 py-4 rounded-xl font-bold text-2xl shadow-md hover:bg-green-700 transition">تحقق من الإجابات</button>
+                </div>
+                <div id="tf-result" class="mt-8 text-center text-3xl font-bold hidden p-6 rounded-xl"></div>
+            </div>
+        </div>
+
+        <!-- التدريب الثالث: التصنيف -->
         <div id="tab-classify" class="tab-content">
-            <div class="bg-white p-6 rounded-xl border-2 border-blue-100 shadow-md">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 text-center">التدريب الثاني: صنف المصادر التالية حسب دلالتها</h2>
-                <p class="text-center text-gray-600 mb-6">اضغط على المصدر ثم اختر التصنيف المناسب له.</p>
+            <div class="bg-white p-6 md:p-10 rounded-2xl border border-gray-200 shadow-lg">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4 text-center">التدريب الثالث: صنف المصادر</h2>
+                <p class="text-center text-gray-600 text-xl mb-8">اضغط على المصدر في الأعلى، ثم اختر الصندوق المناسب له بالأسفل.</p>
                 
-                <div class="mb-8 p-4 bg-gray-50 rounded-lg border border-gray-200 flex flex-wrap gap-3 justify-center" id="words-pool">
+                <div class="mb-10 p-6 bg-blue-50 rounded-xl border border-blue-100 flex flex-wrap gap-4 justify-center" id="words-pool">
                     <!-- الكلمات ستظهر هنا -->
                 </div>
 
-                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="categories-container">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="categories-container">
                     <!-- التصنيفات ستظهر هنا -->
                 </div>
 
-                <div class="mt-8 text-center">
-                    <button onclick="checkClassification()" class="bg-green-600 text-white px-8 py-3 rounded-lg font-bold text-xl shadow hover:bg-green-700 transition">تحقق من التصنيف</button>
+                <div class="mt-10 text-center">
+                    <button onclick="checkClassification()" class="bg-green-600 text-white px-10 py-4 rounded-xl font-bold text-2xl shadow-md hover:bg-green-700 transition">تحقق من التصنيف</button>
                 </div>
-                <div id="classify-result" class="mt-6 text-center text-2xl font-bold hidden p-4 rounded-lg"></div>
+                <div id="classify-result" class="mt-8 text-center text-3xl font-bold hidden p-6 rounded-xl"></div>
             </div>
         </div>
 
-        <!-- التدريب الثالث: التوصيل -->
+        <!-- التدريب الرابع: التوصيل -->
         <div id="tab-match" class="tab-content">
-            <div class="bg-white p-6 rounded-xl border-2 border-blue-100 shadow-md">
-                <h2 class="text-2xl font-bold text-blue-800 mb-4 text-center">التدريب الثالث: صِل المصدر بدلالته الصحيحة</h2>
-                <p class="text-center text-gray-600 mb-8">اختر المصدر من العمود الأيمن ثم اختر دلالته من العمود الأيسر.</p>
+            <div class="bg-white p-6 md:p-10 rounded-2xl border border-gray-200 shadow-lg">
+                <h2 class="text-3xl font-bold text-blue-800 mb-4 text-center">التدريب الرابع: نشاط التوصيل</h2>
+                <p class="text-center text-gray-600 text-xl mb-10">اختر المصدر من العمود الأيمن ثم اختر دلالته الصحيحة من العمود الأيسر.</p>
                 
-                <div class="flex flex-col md:flex-row justify-between gap-8">
+                <div class="flex flex-col md:flex-row justify-between gap-10">
                     <!-- عمود المصادر -->
-                    <div class="flex-1 flex flex-col gap-3" id="match-sources">
+                    <div class="flex-1 flex flex-col gap-4" id="match-sources">
                         <!-- مصادر -->
                     </div>
                     
                     <!-- عمود الدلالات -->
-                    <div class="flex-1 flex flex-col gap-3" id="match-meanings">
+                    <div class="flex-1 flex flex-col gap-4" id="match-meanings">
                         <!-- دلالات -->
                     </div>
                 </div>
 
-                <div class="mt-8 text-center">
-                    <button onclick="resetMatch()" class="bg-gray-500 text-white px-6 py-2 rounded-lg font-bold text-lg shadow hover:bg-gray-600 transition ml-2">إعادة المحاولة</button>
+                <div class="mt-10 text-center">
+                    <button onclick="resetMatch()" class="bg-gray-600 text-white px-8 py-3 rounded-xl font-bold text-xl shadow hover:bg-gray-700 transition">إعادة المحاولة</button>
                 </div>
-                <div id="match-result" class="mt-6 text-center text-2xl font-bold hidden p-4 rounded-lg"></div>
+                <div id="match-result" class="mt-8 text-center text-3xl font-bold hidden p-6 rounded-xl"></div>
             </div>
         </div>
 
@@ -167,39 +187,40 @@
                 tab.classList.remove('active');
             });
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('bg-blue-600', 'text-white');
-                btn.classList.add('bg-gray-200', 'text-gray-800');
+                btn.classList.remove('bg-blue-600', 'text-white', 'border-transparent');
+                btn.classList.add('bg-gray-100', 'text-gray-800', 'border-gray-200');
             });
             
             document.getElementById(tabId).classList.add('active');
             
-            let activeBtnId = '';
-            if(tabId === 'tab-mcq') activeBtnId = 'btn-mcq';
-            if(tabId === 'tab-classify') activeBtnId = 'btn-classify';
-            if(tabId === 'tab-match') activeBtnId = 'btn-match';
-            
+            let activeBtnId = 'btn-' + tabId.split('-')[1];
             let btn = document.getElementById(activeBtnId);
-            btn.classList.remove('bg-gray-200', 'text-gray-800');
-            btn.classList.add('bg-blue-600', 'text-white');
+            btn.classList.remove('bg-gray-100', 'text-gray-800', 'border-gray-200');
+            btn.classList.add('bg-blue-600', 'text-white', 'border-transparent');
         }
 
-        // --- بيانات التدريب الأول (اختيار من متعدد) ---
+        // --- بيانات التدريب الأول (اختيار من متعدد - 20 سؤال) ---
         const mcqQuestions = [
             { q: "المصدر (طَيَرَان) يدل على:", options: ["حرفة", "حركة واضطراب", "لون"], answer: 1 },
-            { q: "الفعل (صنع) مصدره الدال على حرفة هو:", options: ["صَانِع", "صِنَاعَة", "مَصْنَع"], answer: 1 },
-            { q: "المصدر الدال على مرض يأتي غالبًا على وزن:", options: ["فُعَال", "فِعَالَة", "فَعَل"], answer: 0 },
+            { q: "الفعل (صَنَعَ) مصدره الدال على حرفة هو:", options: ["صَانِع", "صِنَاعَة", "مَصْنَع"], answer: 1 },
+            { q: "المصدر الدال على مرض يأتي غَالِبًا على وزن:", options: ["فُعَال", "فِعَالَة", "فَعَل"], answer: 0 },
             { q: "المصدر (زُكَام) يدل على:", options: ["مرض", "صوت", "سير"], answer: 0 },
-            { q: "المصدر الدال على لون من الفعل (حمر) هو:", options: ["احمرار", "أحمر", "حُمْرَة"], answer: 2 },
+            { q: "المصدر الدال على لون من الفعل (حَمِرَ) هو:", options: ["احمرار", "أحمر", "حُمْرَة"], answer: 2 },
             { q: "المصدر (صُرَاخ) وزنه (فُعَال) ويدل على:", options: ["صوت", "امتناع", "مرض"], answer: 0 },
             { q: "المصدر (إِبَاء) يدل على:", options: ["سير", "امتناع", "عيب"], answer: 1 },
-            { q: "الفعل (رحل) مصدره الدال على سير هو:", options: ["رَحِيل", "رِحْلَة", "رَاحِل"], answer: 0 },
+            { q: "الفعل (رَحَلَ) مصدره الدال على سير هو:", options: ["رَحِيل", "رِحْلَة", "رَاحِل"], answer: 0 },
             { q: "المصدر (عَرَج) يدل على:", options: ["لون", "حركة", "عيب"], answer: 2 },
-            { q: "المصدر الدال على صوت يأتي غالبًا على وزني:", options: ["فُعَال وفَعِيل", "فِعَالَة وفُعْلَة", "فَعَلان وفَعَل"], answer: 0 },
+            { q: "المصدر الدال على صوت يأتي غَالِبًا على وزني:", options: ["فُعَال وفَعِيل", "فِعَالَة وفُعْلَة", "فَعَلان وفَعَل"], answer: 0 },
             { q: "المصدر (خَفَقَان) يدل على:", options: ["حركة واضطراب", "صوت", "سير"], answer: 0 },
-            { q: "المصدر الدال على حرفة يأتي غالبًا على وزن:", options: ["فُعَال", "فِعَالَة", "فَعِيل"], answer: 1 },
+            { q: "المصدر الدال على حرفة يأتي غَالِبًا على وزن:", options: ["فُعَال", "فِعَالَة", "فَعِيل"], answer: 1 },
             { q: "المصدر (نِفَار) يدل على:", options: ["مرض", "امتناع", "سير"], answer: 1 },
             { q: "المصدر (دَبِيب) يدل على:", options: ["عيب", "صوت", "سير"], answer: 2 },
-            { q: "المصدر (زَئِير) يدل على:", options: ["صوت", "مرض", "لون"], answer: 0 }
+            { q: "المصدر (زَئِير) يدل على:", options: ["صوت", "مرض", "لون"], answer: 0 },
+            { q: "المصدر (خِيَاطَة) وزنه (فِعَالَة) ويدل على:", options: ["سير", "حرفة", "حركة"], answer: 1 },
+            { q: "المصدر (زُرْقَة) يدل على:", options: ["لون", "عيب", "صوت"], answer: 0 },
+            { q: "المصدر (دُوَار) يدل على:", options: ["حركة", "صوت", "مرض"], answer: 2 },
+            { q: "المصدر (عَوَر) يدل على:", options: ["عيب", "لون", "سير"], answer: 0 },
+            { q: "المصدر (فَوَرَان) يدل على:", options: ["مرض", "حركة واضطراب", "امتناع"], answer: 1 }
         ];
 
         let mcqSelections = new Array(mcqQuestions.length).fill(null);
@@ -213,16 +234,16 @@
                     optionsHtml += `
                         <button onclick="selectMCQOption(${index}, ${optIndex})" 
                                 id="mcq-btn-${index}-${optIndex}"
-                                class="btn-option flex-1 bg-gray-50 border-2 border-gray-200 text-gray-800 font-medium py-3 px-4 rounded-lg hover:border-blue-400 focus:outline-none text-lg">
+                                class="btn-option flex-1 bg-gray-50 border-2 border-gray-300 text-gray-800 font-bold py-4 px-4 rounded-xl focus:outline-none text-xl">
                             ${opt}
                         </button>
                     `;
                 });
 
                 container.innerHTML += `
-                    <div class="bg-gray-50 p-5 rounded-lg border border-gray-200">
-                        <h3 class="text-xl font-bold text-gray-900 mb-4">${index + 1}. ${item.q}</h3>
-                        <div class="flex flex-col sm:flex-row gap-3">
+                    <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">${index + 1}. ${item.q}</h3>
+                        <div class="flex flex-col sm:flex-row gap-4">
                             ${optionsHtml}
                         </div>
                     </div>
@@ -232,18 +253,16 @@
 
         function selectMCQOption(qIndex, optIndex) {
             mcqSelections[qIndex] = optIndex;
-            // إزالة التحديد السابق
             for(let i=0; i<3; i++) {
                 let btn = document.getElementById(`mcq-btn-${qIndex}-${i}`);
                 if(btn) {
-                    btn.classList.remove('bg-blue-100', 'border-blue-500', 'text-blue-800');
-                    btn.classList.add('bg-gray-50', 'border-gray-200', 'text-gray-800');
+                    btn.classList.remove('bg-blue-100', 'border-blue-500', 'text-blue-900');
+                    btn.classList.add('bg-gray-50', 'border-gray-300', 'text-gray-800');
                 }
             }
-            // إضافة التحديد الجديد
             let selectedBtn = document.getElementById(`mcq-btn-${qIndex}-${optIndex}`);
-            selectedBtn.classList.remove('bg-gray-50', 'border-gray-200', 'text-gray-800');
-            selectedBtn.classList.add('bg-blue-100', 'border-blue-500', 'text-blue-800');
+            selectedBtn.classList.remove('bg-gray-50', 'border-gray-300', 'text-gray-800');
+            selectedBtn.classList.add('bg-blue-100', 'border-blue-500', 'text-blue-900');
         }
 
         function checkMCQ() {
@@ -269,11 +288,11 @@
                 let selectedBtn = document.getElementById(`mcq-btn-${i}-${selected}`);
                 let correctBtn = document.getElementById(`mcq-btn-${i}-${correct}`);
 
-                // إعادة تعيين الألوان
                 for(let j=0; j<3; j++) {
                     let btn = document.getElementById(`mcq-btn-${i}-${j}`);
                     btn.classList.remove('correct-answer', 'wrong-answer');
-                    btn.disabled = true; // تعطيل الأزرار بعد التحقق
+                    btn.disabled = true; 
+                    btn.style.cursor = 'default';
                 }
 
                 if(selected === correct) {
@@ -290,28 +309,124 @@
             
             if(score === mcqQuestions.length) {
                 resultDiv.classList.add('bg-green-100', 'text-green-800');
-                resultDiv.innerHTML = `مُمْتَاز! لَقَدْ أَجَبْتَ عَنْ جَمِيعِ الأَسْئِلَةِ إِجَابَةً صَحِيحَةً. (${score}/${mcqQuestions.length}) عَمَل رَائِع!`;
+                resultDiv.innerHTML = `مُمْتَاز! لَقَدْ أَجَبْتَ إِجَابَةً صَحِيحَةً كَامِلَةً. (${score}/${mcqQuestions.length}) عَمَل رَائِع!`;
             } else if (score >= mcqQuestions.length / 2) {
                 resultDiv.classList.add('bg-blue-100', 'text-blue-800');
                 resultDiv.innerHTML = `جَيِّد جِدًّا! نَتِيجَتُكَ هِيَ (${score}/${mcqQuestions.length}). شُكْرًا لِمَجْهُودِكَ.`;
             } else {
                 resultDiv.classList.add('bg-red-100', 'text-red-800');
-                resultDiv.innerHTML = `نَتِيجَتُكَ هِيَ (${score}/${mcqQuestions.length}). رَاجِعِ الْقَاعِدَةَ وَحَاوِلْ مَرَّةً أُخْرَى، أَنْتَ تَسْتَطِيعُ!`;
+                resultDiv.innerHTML = `نَتِيجَتُكَ هِيَ (${score}/${mcqQuestions.length}). رَاجِعِ الْقَاعِدَةَ وَحَاوِلْ مَرَّةً أُخْرَى!`;
             }
         }
 
-        // --- بيانات التدريب الثاني (التصنيف) ---
+        // --- بيانات التدريب الثاني (صح أم خطأ - 10 أسئلة) ---
+        const tfQuestions = [
+            { q: "المصدر (زَئِير) يدل على صوت ووزنه (فَعِيل).", answer: true },
+            { q: "المصدر الدال على حرفة يأتي على وزن (فَعَل).", answer: false },
+            { q: "(حُمْرَة) مصدر يدل على لون.", answer: true },
+            { q: "(غَلَيَان) مصدر يدل على سير.", answer: false },
+            { q: "الأوزان (فُعَال) و (فَعِيل) كلاهما قد يدل على صوت.", answer: true },
+            { q: "(إِبَاء) مصدر يدل على امتناع.", answer: true },
+            { q: "المصدر (زُكَام) يدل على عيب.", answer: false },
+            { q: "يدل المصدر على حركة واضطراب إذا جاء على وزن (فَعَلَان).", answer: true },
+            { q: "(دَبِيب) مصدر يدل على حرفة.", answer: false },
+            { q: "(عَوَر) مصدر يدل على عيب.", answer: true }
+        ];
+
+        let tfSelections = new Array(tfQuestions.length).fill(null);
+
+        function renderTF() {
+            const container = document.getElementById('tf-container');
+            container.innerHTML = '';
+            tfQuestions.forEach((item, index) => {
+                container.innerHTML += `
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
+                        <h3 class="text-2xl font-bold text-gray-900 flex-1">${index + 1}. ${item.q}</h3>
+                        <div class="flex gap-4 w-full md:w-auto">
+                            <button onclick="selectTF(${index}, true)" id="tf-btn-${index}-true" class="flex-1 md:flex-none md:w-32 bg-white border-2 border-gray-300 text-gray-800 font-bold py-3 px-6 rounded-xl text-xl hover:bg-gray-100 transition focus:outline-none">صح</button>
+                            <button onclick="selectTF(${index}, false)" id="tf-btn-${index}-false" class="flex-1 md:flex-none md:w-32 bg-white border-2 border-gray-300 text-gray-800 font-bold py-3 px-6 rounded-xl text-xl hover:bg-gray-100 transition focus:outline-none">خطأ</button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function selectTF(qIndex, value) {
+            tfSelections[qIndex] = value;
+            
+            let btnTrue = document.getElementById(`tf-btn-${qIndex}-true`);
+            let btnFalse = document.getElementById(`tf-btn-${qIndex}-false`);
+            
+            btnTrue.classList.remove('bg-blue-100', 'border-blue-500', 'text-blue-900');
+            btnFalse.classList.remove('bg-blue-100', 'border-blue-500', 'text-blue-900');
+            
+            if(value === true) {
+                btnTrue.classList.add('bg-blue-100', 'border-blue-500', 'text-blue-900');
+            } else {
+                btnFalse.classList.add('bg-blue-100', 'border-blue-500', 'text-blue-900');
+            }
+        }
+
+        function checkTF() {
+            let score = 0;
+            let allAnswered = true;
+
+            for(let i=0; i<tfQuestions.length; i++) {
+                if(tfSelections[i] === null) {
+                    allAnswered = false;
+                    break;
+                }
+            }
+
+            if(!allAnswered) {
+                alert("الرجاء الإجابة عن جميع الأسئلة أولاً.");
+                return;
+            }
+
+            tfQuestions.forEach((item, i) => {
+                let selected = tfSelections[i];
+                let correct = item.answer;
+                
+                let btnTrue = document.getElementById(`tf-btn-${i}-true`);
+                let btnFalse = document.getElementById(`tf-btn-${i}-false`);
+
+                btnTrue.disabled = true; btnFalse.disabled = true;
+
+                if(selected === correct) {
+                    score++;
+                    if(selected === true) btnTrue.classList.add('correct-answer');
+                    else btnFalse.classList.add('correct-answer');
+                } else {
+                    if(selected === true) btnTrue.classList.add('wrong-answer');
+                    else btnFalse.classList.add('wrong-answer');
+                    
+                    if(correct === true) btnTrue.classList.add('correct-answer');
+                    else btnFalse.classList.add('correct-answer');
+                }
+            });
+
+            const resultDiv = document.getElementById('tf-result');
+            resultDiv.classList.remove('hidden', 'bg-green-100', 'text-green-800', 'bg-red-100', 'text-red-800');
+            
+            if(score === tfQuestions.length) {
+                resultDiv.classList.add('bg-green-100', 'text-green-800');
+                resultDiv.innerHTML = `مُمْتَاز! جَمِيعُ إِجَابَاتِكَ صَحِيحَةٌ. (${score}/${tfQuestions.length})`;
+            } else {
+                resultDiv.classList.add('bg-blue-100', 'text-blue-800');
+                resultDiv.innerHTML = `جَيِّد! نَتِيجَتُكَ هِيَ (${score}/${tfQuestions.length}).`;
+            }
+        }
+
+        // --- بيانات التدريب الثالث (التصنيف - 16 كلمة) ---
         const classifyWords = [
-            { word: "تِجَارَة", category: "حرفة" },
-            { word: "سُعَال", category: "مرض" },
-            { word: "حَوَل", category: "عيب" },
-            { word: "نَهِيق", category: "صوت" },
-            { word: "صُفْرَة", category: "لون" },
-            { word: "جِمَاح", category: "امتناع" },
-            { word: "غَلَيَان", category: "حركة" },
-            { word: "زِرَاعَة", category: "حرفة" },
-            { word: "صُدَاع", category: "مرض" },
-            { word: "رَحِيل", category: "سير" }
+            { word: "نِجَارَة", category: "حرفة" }, { word: "طِبَاعَة", category: "حرفة" },
+            { word: "سُعَال", category: "مرض" }, { word: "صُدَاع", category: "مرض" },
+            { word: "حَوَل", category: "عيب" }, { word: "عَمَى", category: "عيب" },
+            { word: "صَهِيل", category: "صوت" }, { word: "نُبَاح", category: "صوت" },
+            { word: "صُفْرَة", category: "لون" }, { word: "خُضْرَة", category: "لون" },
+            { word: "جِمَاح", category: "امتناع" }, { word: "فِرَار", category: "امتناع" },
+            { word: "دَوَرَان", category: "حركة" }, { word: "فَوَرَان", category: "حركة" },
+            { word: "دَبِيب", category: "سير" }, { word: "رَسِيم", category: "سير" }
         ];
 
         const categories = ["حرفة", "مرض", "صوت", "حركة", "لون", "عيب", "امتناع", "سير"];
@@ -326,14 +441,13 @@
             catsContainer.innerHTML = '';
             classifications = {};
 
-            // خلط الكلمات
             let shuffledWords = [...classifyWords].sort(() => Math.random() - 0.5);
 
             shuffledWords.forEach((item, index) => {
                 pool.innerHTML += `
                     <div id="word-${index}" 
                          onclick="selectWordToClassify('${item.word}', ${index})"
-                         class="word-item bg-white border-2 border-indigo-200 text-indigo-800 px-4 py-2 rounded-full font-bold text-lg shadow-sm hover:bg-indigo-50 transition">
+                         class="word-item bg-white border-2 border-blue-300 text-blue-900 px-6 py-2 rounded-xl font-bold text-2xl shadow-sm hover:bg-blue-50 transition">
                         ${item.word}
                     </div>
                 `;
@@ -341,23 +455,22 @@
 
             categories.forEach(cat => {
                 catsContainer.innerHTML += `
-                    <div class="category-box bg-white rounded-lg p-3 text-center flex flex-col" onclick="placeWordInCategory('${cat}')">
-                        <h4 class="font-bold text-gray-700 mb-2 border-b pb-1">${cat}</h4>
-                        <div id="cat-box-${cat}" class="flex-1 flex flex-col gap-2 min-h-[50px]"></div>
+                    <div class="category-box bg-white rounded-xl p-4 text-center flex flex-col cursor-pointer hover:bg-gray-50" onclick="placeWordInCategory('${cat}')">
+                        <h4 class="font-bold text-gray-800 text-xl mb-3 border-b-2 border-gray-200 pb-2">${cat}</h4>
+                        <div id="cat-box-${cat}" class="flex-1 flex flex-wrap gap-2 justify-center content-start"></div>
                     </div>
                 `;
             });
         }
 
         function selectWordToClassify(word, index) {
-            // إزالة التحديد السابق
-            document.querySelectorAll('.word-item').forEach(el => el.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600'));
+            document.querySelectorAll('.word-item').forEach(el => el.classList.remove('bg-blue-700', 'text-white', 'border-blue-700'));
             
             selectedWordForClassification = { word, index };
             
             let el = document.getElementById(`word-${index}`);
-            el.classList.add('bg-indigo-600', 'text-white', 'border-indigo-600');
-            el.classList.remove('bg-white', 'text-indigo-800', 'border-indigo-200');
+            el.classList.add('bg-blue-700', 'text-white', 'border-blue-700');
+            el.classList.remove('bg-white', 'text-blue-900', 'border-blue-300');
         }
 
         function placeWordInCategory(categoryName) {
@@ -366,11 +479,9 @@
             const word = selectedWordForClassification.word;
             const index = selectedWordForClassification.index;
             
-            // إخفاء الكلمة من الصندوق الرئيسي أو من التصنيف القديم
             let wordEl = document.getElementById(`word-${index}`);
             wordEl.style.display = 'none';
 
-            // إذا كانت الكلمة موجودة مسبقًا في تصنيف آخر، نحذفها
             for (let cat in classifications) {
                 classifications[cat] = classifications[cat].filter(w => w.word !== word);
                 renderCategoryBox(cat);
@@ -382,7 +493,6 @@
             classifications[categoryName].push({ word, index });
             
             renderCategoryBox(categoryName);
-            
             selectedWordForClassification = null;
         }
 
@@ -392,8 +502,8 @@
             if(classifications[categoryName]) {
                 classifications[categoryName].forEach(item => {
                     box.innerHTML += `
-                        <div onclick="returnWordToPool('${item.word}', ${item.index}, '${categoryName}')"
-                             class="bg-indigo-100 text-indigo-900 px-2 py-1 rounded text-sm font-bold cursor-pointer hover:bg-red-100 hover:text-red-800 transition"
+                        <div onclick="returnWordToPool('${item.word}', ${item.index}, '${categoryName}', event)"
+                             class="bg-blue-100 text-blue-900 border border-blue-200 px-3 py-1 rounded-lg text-lg font-bold cursor-pointer hover:bg-red-100 hover:text-red-800 hover:border-red-300 transition"
                              title="اضغط للإزالة">
                             ${item.word}
                         </div>
@@ -402,15 +512,15 @@
             }
         }
 
-        function returnWordToPool(word, index, categoryName) {
+        function returnWordToPool(word, index, categoryName, event) {
             event.stopPropagation();
             classifications[categoryName] = classifications[categoryName].filter(w => w.word !== word);
             renderCategoryBox(categoryName);
             
             let wordEl = document.getElementById(`word-${index}`);
             wordEl.style.display = 'block';
-            wordEl.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
-            wordEl.classList.add('bg-white', 'text-indigo-800', 'border-indigo-200');
+            wordEl.classList.remove('bg-blue-700', 'text-white', 'border-blue-700');
+            wordEl.classList.add('bg-white', 'text-blue-900', 'border-blue-300');
         }
 
         function checkClassification() {
@@ -441,28 +551,23 @@
             
             if(correctCount === totalWords) {
                 resultDiv.classList.add('bg-green-100', 'text-green-800');
-                resultDiv.innerHTML = `أَحْسَنْتَ صُنْعًا! التَّصْنِيفُ كُلُّهُ صَحِيحٌ. (${correctCount}/${totalWords})`;
+                resultDiv.innerHTML = `أَحْسَنْت! التَّصْنِيفُ كُلُّهُ صَحِيحٌ. (${correctCount}/${totalWords})`;
             } else {
                 resultDiv.classList.add('bg-red-100', 'text-red-800');
                 resultDiv.innerHTML = `لَدَيْكَ بَعْضُ الْأَخْطَاءِ. الصَّحِيحُ هُوَ (${correctCount}/${totalWords}). حَاوِلْ إِعَادَةَ التَّرْتِيبِ.`;
             }
         }
 
-        // --- بيانات التدريب الثالث (التوصيل) ---
-        const matchData = [
-            { source: "صِنَاعَة", meaning: "حرفة" },
-            { source: "سُعَال", meaning: "مرض" },
-            { خَرِير: "صوت" }, // We'll structure it explicitly below
-        ];
-        
+        // --- بيانات التدريب الرابع (التوصيل - 8 أزواج) ---
         const matchPairs = [
-            { id: 1, s: "خِيَاطَة", m: "حرفة" },
-            { id: 2, s: "دَبِيب", m: "سير" },
-            { id: 3, s: "عَمَى", m: "عيب" },
-            { id: 4, s: "طَيَرَان", m: "حركة واضطراب" },
-            { id: 5, s: "خُضْرَة", m: "لون" },
-            { id: 6, s: "نِفَار", m: "امتناع" },
-            { id: 7, s: "زُكَام", m: "مرض" }
+            { id: 1, s: "زِرَاعَة", m: "حرفة" },
+            { id: 2, s: "حُمْرَة", m: "لون" },
+            { id: 3, s: "خَرِير", m: "صوت" },
+            { id: 4, s: "صِيَام", m: "امتناع" },
+            { id: 5, s: "رَحِيل", m: "سير" },
+            { id: 6, s: "دُوَار", m: "مرض" },
+            { id: 7, s: "طَيَرَان", m: "حركة واضطراب" },
+            { id: 8, s: "عَرَج", m: "عيب" }
         ];
 
         let selectedMatchSource = null;
@@ -485,7 +590,7 @@
 
             shuffledSources.forEach(item => {
                 sourcesContainer.innerHTML += `
-                    <button id="ms-${item.id}" onclick="selectMatchSource(${item.id})" class="match-source-btn bg-white border-2 border-teal-300 text-teal-900 font-bold py-3 px-4 rounded-lg shadow-sm hover:bg-teal-50 transition text-lg">
+                    <button id="ms-${item.id}" onclick="selectMatchSource(${item.id})" class="match-source-btn bg-white border-2 border-indigo-300 text-indigo-900 font-bold py-4 px-6 rounded-xl shadow-sm hover:bg-indigo-50 transition text-2xl focus:outline-none">
                         ${item.s}
                     </button>
                 `;
@@ -493,7 +598,7 @@
 
             shuffledMeanings.forEach(item => {
                 meaningsContainer.innerHTML += `
-                    <button id="mm-${item.id}" onclick="selectMatchMeaning(${item.id})" class="match-meaning-btn bg-white border-2 border-orange-300 text-orange-900 font-bold py-3 px-4 rounded-lg shadow-sm hover:bg-orange-50 transition text-lg">
+                    <button id="mm-${item.id}" onclick="selectMatchMeaning(${item.id})" class="match-meaning-btn bg-white border-2 border-orange-300 text-orange-900 font-bold py-4 px-6 rounded-xl shadow-sm hover:bg-orange-50 transition text-2xl focus:outline-none">
                         ${item.m}
                     </button>
                 `;
@@ -505,12 +610,12 @@
             if(btn.classList.contains('matched')) return;
 
             document.querySelectorAll('.match-source-btn:not(.matched)').forEach(el => {
-                el.classList.remove('bg-teal-500', 'text-white');
-                el.classList.add('bg-white', 'text-teal-900');
+                el.classList.remove('bg-indigo-600', 'text-white');
+                el.classList.add('bg-white', 'text-indigo-900');
             });
 
-            btn.classList.remove('bg-white', 'text-teal-900');
-            btn.classList.add('bg-teal-500', 'text-white');
+            btn.classList.remove('bg-white', 'text-indigo-900');
+            btn.classList.add('bg-indigo-600', 'text-white');
             selectedMatchSource = id;
 
             checkMatch();
@@ -535,11 +640,10 @@
         function checkMatch() {
             if(selectedMatchSource !== null && selectedMatchMeaning !== null) {
                 if(selectedMatchSource === selectedMatchMeaning) {
-                    // إجابة صحيحة
                     let sBtn = document.getElementById(`ms-${selectedMatchSource}`);
                     let mBtn = document.getElementById(`mm-${selectedMatchMeaning}`);
                     
-                    sBtn.classList.remove('bg-teal-500');
+                    sBtn.classList.remove('bg-indigo-600');
                     sBtn.classList.add('correct-answer', 'matched');
                     sBtn.disabled = true;
 
@@ -557,7 +661,6 @@
                     }
 
                 } else {
-                    // إجابة خاطئة
                     let sBtn = document.getElementById(`ms-${selectedMatchSource}`);
                     let mBtn = document.getElementById(`mm-${selectedMatchMeaning}`);
                     
@@ -565,8 +668,8 @@
                     mBtn.classList.add('wrong-answer');
                     
                     setTimeout(() => {
-                        sBtn.classList.remove('wrong-answer', 'bg-teal-500', 'text-white');
-                        sBtn.classList.add('bg-white', 'text-teal-900');
+                        sBtn.classList.remove('wrong-answer', 'bg-indigo-600', 'text-white');
+                        sBtn.classList.add('bg-white', 'text-indigo-900');
                         
                         mBtn.classList.remove('wrong-answer', 'bg-orange-500', 'text-white');
                         mBtn.classList.add('bg-white', 'text-orange-900');
@@ -587,6 +690,7 @@
         // --- التهيئة عند تحميل الصفحة ---
         window.onload = () => {
             renderMCQ();
+            renderTF();
             renderClassification();
             renderMatch();
         };
@@ -594,3 +698,5 @@
     </script>
 </body>
 </html>
+
+
