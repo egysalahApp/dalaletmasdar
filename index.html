@@ -78,7 +78,7 @@
     </header>
 
     <main class="max-w-5xl mx-auto px-4">
-        <!-- ملخص سريع للدرس (تم تكبير الخطوط هنا) -->
+        <!-- ملخص سريع للدرس -->
         <section class="bg-gray-50 p-6 md:p-10 rounded-2xl border border-gray-200 mb-10 shadow-sm">
             <h2 class="text-4xl font-bold text-gray-800 mb-6 border-b-2 border-gray-300 pb-4">تذكير سريع بالقاعدة:</h2>
             <p class="text-2xl md:text-3xl text-gray-700 leading-relaxed mb-8">
@@ -99,7 +99,7 @@
         <!-- أزرار التنقل بين التدريبات -->
         <div class="flex flex-wrap justify-center gap-4 mb-10">
             <button onclick="showTab('tab-mcq')" class="tab-btn active bg-blue-600 text-white px-6 py-4 rounded-xl font-bold text-xl shadow-md hover:bg-blue-700 transition" id="btn-mcq">اختيار من متعدد</button>
-            <button onclick="showTab('tab-tf')" class="tab-btn bg-gray-100 text-gray-800 border-2 border-gray-200 px-6 py-4 rounded-xl font-bold text-xl shadow-sm hover:bg-gray-200 transition" id="btn-tf">صح أم خطأ</button>
+            <button onclick="showTab('tab-tf')" class="tab-btn bg-gray-100 text-gray-800 border-2 border-gray-200 px-6 py-4 rounded-xl font-bold text-xl shadow-sm hover:bg-gray-200 transition" id="btn-tf">صواب أم خطأ</button>
             <button onclick="showTab('tab-classify')" class="tab-btn bg-gray-100 text-gray-800 border-2 border-gray-200 px-6 py-4 rounded-xl font-bold text-xl shadow-sm hover:bg-gray-200 transition" id="btn-classify">صنّف المصادر</button>
             <button onclick="showTab('tab-match')" class="tab-btn bg-gray-100 text-gray-800 border-2 border-gray-200 px-6 py-4 rounded-xl font-bold text-xl shadow-sm hover:bg-gray-200 transition" id="btn-match">نشاط التوصيل</button>
         </div>
@@ -118,10 +118,10 @@
             </div>
         </div>
 
-        <!-- التدريب الثاني: صح أم خطأ -->
+        <!-- التدريب الثاني: صواب أم خطأ -->
         <div id="tab-tf" class="tab-content">
             <div class="bg-white p-6 md:p-10 rounded-2xl border border-gray-200 shadow-lg">
-                <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">التدريب الثاني: صح أم خطأ</h2>
+                <h2 class="text-3xl font-bold text-blue-800 mb-8 text-center">التدريب الثاني: صواب أم خطأ</h2>
                 <div id="tf-container" class="space-y-6">
                     <!-- سيتم حقن الأسئلة هنا -->
                 </div>
@@ -319,7 +319,7 @@
             }
         }
 
-        // --- بيانات التدريب الثاني (صح أم خطأ - 10 أسئلة) ---
+        // --- بيانات التدريب الثاني (صواب أم خطأ - 10 أسئلة) ---
         const tfQuestions = [
             { q: "المصدر (زَئِير) يدل على صوت ووزنه (فَعِيل).", answer: true },
             { q: "المصدر الدال على حرفة يأتي على وزن (فَعَل).", answer: false },
@@ -343,7 +343,7 @@
                     <div class="bg-gray-50 p-6 rounded-xl border border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
                         <h3 class="text-2xl font-bold text-gray-900 flex-1">${index + 1}. ${item.q}</h3>
                         <div class="flex gap-4 w-full md:w-auto">
-                            <button onclick="selectTF(${index}, true)" id="tf-btn-${index}-true" class="flex-1 md:flex-none md:w-32 bg-white border-2 border-gray-300 text-gray-800 font-bold py-3 px-6 rounded-xl text-xl hover:bg-gray-100 transition focus:outline-none">صح</button>
+                            <button onclick="selectTF(${index}, true)" id="tf-btn-${index}-true" class="flex-1 md:flex-none md:w-32 bg-white border-2 border-gray-300 text-gray-800 font-bold py-3 px-6 rounded-xl text-xl hover:bg-gray-100 transition focus:outline-none">صواب</button>
                             <button onclick="selectTF(${index}, false)" id="tf-btn-${index}-false" class="flex-1 md:flex-none md:w-32 bg-white border-2 border-gray-300 text-gray-800 font-bold py-3 px-6 rounded-xl text-xl hover:bg-gray-100 transition focus:outline-none">خطأ</button>
                         </div>
                     </div>
