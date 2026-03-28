@@ -17,6 +17,14 @@
     <script>
         tailwind.config = {
             theme: {
+                // تعديل قيم الحدود الافتراضية لتكون بالـ rem بدلًا من px لضمان التجاوب المطلق مع التكبير
+                borderWidth: {
+                    DEFAULT: '0.0625rem', // بديل 1px
+                    '0': '0',
+                    '2': '0.125rem',      // بديل 2px
+                    '4': '0.25rem',       // بديل 4px
+                    '8': '0.5rem',        // بديل 8px
+                },
                 extend: {
                     fontFamily: {
                         readex: ['"Readex Pro"', 'sans-serif'],
@@ -85,7 +93,7 @@
     <header class="py-6 flex flex-col items-center justify-center gap-1 w-full bg-pastel-bg">
         <a href="https://www.youtube.com/egysalah" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 text-slate-900 text-2xl font-bold transition-opacity">
             <span>العربية السهلة</span>
-            <!-- أيقونة يوتيوب نقية SVG ثابتة الأبعاد بالبكسل نسبياً (w-7 h-7 = 1.75rem) -->
+            <!-- أيقونة يوتيوب نقية SVG -->
             <svg class="w-7 h-7" viewBox="0 0 24 24" fill="#FF0000" xmlns="http://www.w3.org/2000/svg">
                 <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
             </svg>
@@ -95,8 +103,8 @@
 
     <!-- غلاف التبويبات الثابتة وشريط التقدم -->
     <div id="sticky-nav-wrapper" class="sticky top-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
-        <!-- التبويبات (صف واحد، تمرير أفقي، نحيفة py-1) -->
-        <nav class="max-w-4xl mx-auto flex overflow-x-auto hide-scrollbar py-1 px-4 gap-2 justify-start md:justify-center items-center">
+        <!-- التبويبات (صف واحد، تمرير أفقي) -->
+        <nav class="max-w-4xl mx-auto flex overflow-x-auto hide-scrollbar py-2 px-4 gap-3 justify-start md:justify-center items-center">
             <button onclick="switchSection('section-review')" id="tab-review" class="tab-btn whitespace-nowrap px-5 py-2 rounded-full text-base font-bold border-2 transition-colors bg-blue-600 border-blue-600 text-white">المراجعة</button>
             <button onclick="switchSection('section-mcq')" id="tab-mcq" class="tab-btn whitespace-nowrap px-5 py-2 rounded-full text-base font-bold border-2 transition-colors bg-white border-slate-200 text-slate-600">اختيار من متعدد</button>
             <button onclick="switchSection('section-tf')" id="tab-tf" class="tab-btn whitespace-nowrap px-5 py-2 rounded-full text-base font-bold border-2 transition-colors bg-white border-slate-200 text-slate-600">صواب أم خطأ</button>
@@ -104,81 +112,81 @@
             <button onclick="switchSection('section-match')" id="tab-match" class="tab-btn whitespace-nowrap px-5 py-2 rounded-full text-base font-bold border-2 transition-colors bg-white border-slate-200 text-slate-600">نشاط التوصيل</button>
             <button onclick="switchSection('section-result')" id="tab-result" class="tab-btn whitespace-nowrap px-5 py-2 rounded-full text-base font-bold border-2 transition-colors bg-white border-slate-200 text-slate-600 hidden">النتيجة</button>
         </nav>
-        <!-- شريط التقدم النحيف (2px مناسب هنا كونه حد تصميمي) -->
+        <!-- شريط التقدم النحيف (مسموح بالـ px هنا لأنه عنصر تصميمي ثابت النحافة) -->
         <div class="h-[2px] w-full bg-slate-100">
             <div id="progress-bar" class="h-full bg-blue-500 w-0 transition-all duration-500 ease-out"></div>
         </div>
     </div>
 
     <!-- المحتوى الرئيسي -->
-    <main class="max-w-3xl mx-auto w-full px-4 mt-6 flex-grow">
+    <main class="max-w-3xl mx-auto w-full px-4 mt-8 flex-grow">
         
         <!-- قسم: مراجعة القاعدة -->
         <section id="section-review" class="content-section scroll-mt-custom animate-fade-in block">
-            <div class="text-center mb-8 bg-white p-4 rounded-2xl border border-blue-100 shadow-sm">
+            <div class="text-center mb-8 bg-white p-5 rounded-3xl border border-blue-100 shadow-sm">
                 <h1 class="text-3xl md:text-4xl font-bold text-blue-900 leading-snug">دلالات المصادر الثلاثية</h1>
             </div>
             
-            <p class="text-xl md:text-2xl text-slate-700 text-center font-medium mb-6">
+            <p class="text-xl md:text-2xl text-slate-700 text-center font-medium mb-8">
                 المصادر الثلاثية القياسية تأتي غالِبًا على أوزان تدل على معانٍ محددة، تذكّرها جيدًا:
             </p>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5 mb-10">
                 <!-- حرفة -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
-                    <svg class="w-10 h-10 mb-3 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
-                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-1">حرفة</h3>
-                    <p class="text-blue-600 font-bold mb-2 text-lg md:text-xl">فِعَالَة</p>
-                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">مثل: زِرَاعَة</span>
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
+                    <svg class="w-10 h-10 mb-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-2">حرفة</h3>
+                    <p class="text-blue-600 font-bold mb-3 text-lg md:text-xl">فِعَالَة</p>
+                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">مثل: زِرَاعَة</span>
                 </div>
                 <!-- حركة واضطراب -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
-                    <svg class="w-10 h-10 mb-3 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-1">حركة واضطراب</h3>
-                    <p class="text-amber-600 font-bold mb-2 text-lg md:text-xl">فَعَلَان</p>
-                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">مثل: غَلَيَان</span>
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
+                    <svg class="w-10 h-10 mb-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-2">حركة واضطراب</h3>
+                    <p class="text-amber-600 font-bold mb-3 text-lg md:text-xl">فَعَلَان</p>
+                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">مثل: غَلَيَان</span>
                 </div>
                 <!-- مرض -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
-                    <svg class="w-10 h-10 mb-3 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5l10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
-                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-1">مرض</h3>
-                    <p class="text-rose-600 font-bold mb-2 text-lg md:text-xl">فُعَال</p>
-                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">مثل: زُكَام</span>
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
+                    <svg class="w-10 h-10 mb-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 20.5l10-10a4.95 4.95 0 1 0-7-7l-10 10a4.95 4.95 0 1 0 7 7Z"/><path d="m8.5 8.5 7 7"/></svg>
+                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-2">مرض</h3>
+                    <p class="text-rose-600 font-bold mb-3 text-lg md:text-xl">فُعَال</p>
+                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">مثل: زُكَام</span>
                 </div>
                 <!-- صوت -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
-                    <svg class="w-10 h-10 mb-3 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-1">صوت</h3>
-                    <p class="text-indigo-600 font-bold mb-2 text-lg md:text-xl">فُعَال / فَعِيل</p>
-                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">صُرَاخ / زَئِير</span>
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
+                    <svg class="w-10 h-10 mb-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-2">صوت</h3>
+                    <p class="text-indigo-600 font-bold mb-3 text-lg md:text-xl">فُعَال / فَعِيل</p>
+                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">صُرَاخ / زَئِير</span>
                 </div>
                 <!-- لون -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
-                    <svg class="w-10 h-10 mb-3 text-fuchsia-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
-                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-1">لون</h3>
-                    <p class="text-fuchsia-600 font-bold mb-2 text-lg md:text-xl">فُعْلَة</p>
-                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">مثل: حُمْرَة</span>
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
+                    <svg class="w-10 h-10 mb-4 text-fuchsia-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><circle cx="13.5" cy="6.5" r=".5"></circle><circle cx="17.5" cy="10.5" r=".5"></circle><circle cx="8.5" cy="7.5" r=".5"></circle><circle cx="6.5" cy="12.5" r=".5"></circle><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"></path></svg>
+                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-2">لون</h3>
+                    <p class="text-fuchsia-600 font-bold mb-3 text-lg md:text-xl">فُعْلَة</p>
+                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">مثل: حُمْرَة</span>
                 </div>
                 <!-- امتناع -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
-                    <svg class="w-10 h-10 mb-3 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
-                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-1">امتناع</h3>
-                    <p class="text-red-600 font-bold mb-2 text-lg md:text-xl">فِعَال</p>
-                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">مثل: إِبَاء</span>
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
+                    <svg class="w-10 h-10 mb-4 text-red-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-2">امتناع</h3>
+                    <p class="text-red-600 font-bold mb-3 text-lg md:text-xl">فِعَال</p>
+                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">مثل: إِبَاء</span>
                 </div>
                 <!-- عيب -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
-                    <svg class="w-10 h-10 mb-3 text-stone-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
-                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-1">عيب</h3>
-                    <p class="text-stone-600 font-bold mb-2 text-lg md:text-xl">فَعَل</p>
-                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">مثل: عَرَج</span>
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
+                    <svg class="w-10 h-10 mb-4 text-stone-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path><line x1="1" y1="1" x2="23" y2="23"></line></svg>
+                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-2">عيب</h3>
+                    <p class="text-stone-600 font-bold mb-3 text-lg md:text-xl">فَعَل</p>
+                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">مثل: عَرَج</span>
                 </div>
                 <!-- سير -->
-                <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
-                    <svg class="w-10 h-10 mb-3 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-1">سير</h3>
-                    <p class="text-emerald-600 font-bold mb-2 text-lg md:text-xl">فَعِيل</p>
-                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-1.5 rounded-full border border-slate-100">مثل: رَحِيل</span>
+                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm flex flex-col items-center text-center transition-colors">
+                    <svg class="w-10 h-10 mb-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                    <h3 class="font-bold text-slate-800 text-xl md:text-2xl mb-2">سير</h3>
+                    <p class="text-emerald-600 font-bold mb-3 text-lg md:text-xl">فَعِيل</p>
+                    <span class="text-lg md:text-xl text-slate-500 bg-slate-50 px-4 py-2 rounded-full border border-slate-100">مثل: رَحِيل</span>
                 </div>
             </div>
 
@@ -189,7 +197,7 @@
 
         <!-- قسم: اختيار من متعدد -->
         <section id="section-mcq" class="content-section scroll-mt-custom hidden">
-            <div class="text-center mb-8 bg-white p-4 rounded-2xl border border-blue-100 shadow-sm">
+            <div class="text-center mb-8 bg-white p-5 rounded-3xl border border-blue-100 shadow-sm">
                 <h1 class="text-3xl md:text-4xl font-bold text-blue-900 leading-snug">دلالات المصادر الثلاثية</h1>
             </div>
             
@@ -198,17 +206,17 @@
             </div>
             
             <!-- نتيجة القسم المستقلة -->
-            <div id="result-mcq" class="hidden mt-8 bg-blue-50 p-5 rounded-2xl text-center font-bold text-blue-800 border-2 border-blue-200 text-2xl md:text-3xl shadow-sm"></div>
+            <div id="result-mcq" class="hidden mt-8 bg-blue-50 p-6 rounded-3xl text-center font-bold text-blue-800 border-2 border-blue-200 text-2xl md:text-3xl shadow-sm"></div>
 
-            <div class="mt-8 flex justify-between items-center gap-4 flex-wrap">
-                <button onclick="resetSection('section-mcq', initMCQ)" class="px-6 py-3 bg-slate-100 text-slate-700 font-bold rounded-xl transition text-lg md:text-xl flex-1 md:flex-none">إعادة المحاولة</button>
-                <button onclick="goToNextSection('section-tf')" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-xl shadow-md transition text-lg md:text-xl flex-1 md:flex-none">القسم التالي</button>
+            <div class="mt-8 flex justify-between items-stretch gap-4 flex-wrap">
+                <button onclick="resetSection('section-mcq', initMCQ)" class="px-6 py-4 bg-slate-100 text-slate-700 font-bold rounded-2xl transition text-lg md:text-xl flex-1 md:flex-none">إعادة المحاولة</button>
+                <button onclick="goToNextSection('section-tf')" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl shadow-md transition text-lg md:text-xl flex-1 md:flex-none">القسم التالي</button>
             </div>
         </section>
 
         <!-- قسم: صواب أم خطأ -->
         <section id="section-tf" class="content-section scroll-mt-custom hidden">
-            <div class="text-center mb-8 bg-white p-4 rounded-2xl border border-blue-100 shadow-sm">
+            <div class="text-center mb-8 bg-white p-5 rounded-3xl border border-blue-100 shadow-sm">
                 <h1 class="text-3xl md:text-4xl font-bold text-blue-900 leading-snug">دلالات المصادر الثلاثية</h1>
             </div>
             
@@ -217,110 +225,110 @@
             </div>
             
             <!-- نتيجة القسم المستقلة -->
-            <div id="result-tf" class="hidden mt-8 bg-blue-50 p-5 rounded-2xl text-center font-bold text-blue-800 border-2 border-blue-200 text-2xl md:text-3xl shadow-sm"></div>
+            <div id="result-tf" class="hidden mt-8 bg-blue-50 p-6 rounded-3xl text-center font-bold text-blue-800 border-2 border-blue-200 text-2xl md:text-3xl shadow-sm"></div>
 
-            <div class="mt-8 flex justify-between items-center gap-4 flex-wrap">
-                <button onclick="resetSection('section-tf', initTF)" class="px-6 py-3 bg-slate-100 text-slate-700 font-bold rounded-xl transition text-lg md:text-xl flex-1 md:flex-none">إعادة المحاولة</button>
-                <button onclick="goToNextSection('section-classify')" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-xl shadow-md transition text-lg md:text-xl flex-1 md:flex-none">القسم التالي</button>
+            <div class="mt-8 flex justify-between items-stretch gap-4 flex-wrap">
+                <button onclick="resetSection('section-tf', initTF)" class="px-6 py-4 bg-slate-100 text-slate-700 font-bold rounded-2xl transition text-lg md:text-xl flex-1 md:flex-none">إعادة المحاولة</button>
+                <button onclick="goToNextSection('section-classify')" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl shadow-md transition text-lg md:text-xl flex-1 md:flex-none">القسم التالي</button>
             </div>
         </section>
 
         <!-- قسم: التصنيف -->
         <section id="section-classify" class="content-section scroll-mt-custom hidden">
-            <div class="text-center mb-8 bg-white p-4 rounded-2xl border border-blue-100 shadow-sm">
+            <div class="text-center mb-8 bg-white p-5 rounded-3xl border border-blue-100 shadow-sm">
                 <h1 class="text-3xl md:text-4xl font-bold text-blue-900 leading-snug">دلالات المصادر الثلاثية</h1>
             </div>
             
-            <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm mb-6">
-                <p class="text-slate-600 text-xl md:text-2xl font-medium mb-6 text-center leading-relaxed">اختر المصدر من الكلمات، ثم انقر على الصندوق المناسب له.</p>
+            <div class="bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-sm mb-6">
+                <p class="text-slate-600 text-xl md:text-2xl font-medium mb-8 text-center leading-relaxed">اختر المصدر من الكلمات، ثم انقر على الصندوق المناسب له.</p>
                 
-                <!-- الكلمات المتاحة (min-h-[4rem] بدل px) -->
-                <div id="classify-words-pool" class="flex flex-wrap justify-center gap-4 mb-8 min-h-[4rem]">
+                <!-- الكلمات المتاحة (min-h-[4rem] لتجنب الانهيار وتوفير مساحة للكلمات المتبقية) -->
+                <div id="classify-words-pool" class="flex flex-wrap justify-center gap-4 mb-10 min-h-[4rem]">
                     <!-- توليد عبر JS -->
                 </div>
                 
                 <!-- التغذية الراجعة للتصنيف -->
-                <div id="classify-feedback" class="hidden mb-6 text-center text-xl font-bold p-4 rounded-xl"></div>
+                <div id="classify-feedback" class="hidden mb-8 text-center text-xl font-bold p-5 rounded-2xl"></div>
 
                 <!-- صناديق التصنيف -->
-                <div id="classify-categories" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div id="classify-categories" class="grid grid-cols-2 md:grid-cols-4 gap-5">
                     <!-- توليد عبر JS -->
                 </div>
             </div>
 
             <!-- نتيجة القسم المستقلة -->
-            <div id="result-classify" class="hidden mb-6 bg-blue-50 p-5 rounded-2xl text-center font-bold text-blue-800 border-2 border-blue-200 text-2xl md:text-3xl shadow-sm"></div>
+            <div id="result-classify" class="hidden mb-6 bg-blue-50 p-6 rounded-3xl text-center font-bold text-blue-800 border-2 border-blue-200 text-2xl md:text-3xl shadow-sm"></div>
 
-            <div class="mt-8 flex justify-between items-center gap-4 flex-wrap">
-                <button onclick="resetSection('section-classify', initClassify)" class="px-6 py-3 bg-slate-100 text-slate-700 font-bold rounded-xl transition text-lg md:text-xl flex-1 md:flex-none">إعادة المحاولة</button>
-                <button onclick="goToNextSection('section-match')" class="px-8 py-3 bg-blue-600 text-white font-bold rounded-xl shadow-md transition text-lg md:text-xl flex-1 md:flex-none">القسم التالي</button>
+            <div class="mt-8 flex justify-between items-stretch gap-4 flex-wrap">
+                <button onclick="resetSection('section-classify', initClassify)" class="px-6 py-4 bg-slate-100 text-slate-700 font-bold rounded-2xl transition text-lg md:text-xl flex-1 md:flex-none">إعادة المحاولة</button>
+                <button onclick="goToNextSection('section-match')" class="px-8 py-4 bg-blue-600 text-white font-bold rounded-2xl shadow-md transition text-lg md:text-xl flex-1 md:flex-none">القسم التالي</button>
             </div>
         </section>
 
         <!-- قسم: التوصيل -->
         <section id="section-match" class="content-section scroll-mt-custom hidden">
-            <div class="text-center mb-8 bg-white p-4 rounded-2xl border border-blue-100 shadow-sm">
+            <div class="text-center mb-8 bg-white p-5 rounded-3xl border border-blue-100 shadow-sm">
                 <h1 class="text-3xl md:text-4xl font-bold text-blue-900 leading-snug">دلالات المصادر الثلاثية</h1>
             </div>
             
-            <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm mb-6">
-                <p class="text-slate-600 text-xl md:text-2xl font-medium mb-8 text-center leading-relaxed">صل الكلمة في العمود الأول بدلالتها الصحيحة في العمود الثاني.</p>
+            <div class="bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-sm mb-6">
+                <p class="text-slate-600 text-xl md:text-2xl font-medium mb-10 text-center leading-relaxed">صل الكلمة في العمود الأول بدلالتها الصحيحة في العمود الثاني.</p>
                 
-                <div id="match-feedback" class="hidden mb-6 text-center text-xl font-bold p-4 rounded-xl"></div>
+                <div id="match-feedback" class="hidden mb-8 text-center text-xl font-bold p-5 rounded-2xl"></div>
 
-                <div class="flex flex-col sm:flex-row justify-between gap-4 md:gap-8">
+                <div class="flex flex-col sm:flex-row justify-between gap-6 md:gap-10">
                     <!-- عمود المصادر -->
-                    <div id="match-col-sources" class="flex-1 flex flex-col gap-4"></div>
+                    <div id="match-col-sources" class="flex-1 flex flex-col gap-5"></div>
                     <!-- عمود الدلالات -->
-                    <div id="match-col-meanings" class="flex-1 flex flex-col gap-4"></div>
+                    <div id="match-col-meanings" class="flex-1 flex flex-col gap-5"></div>
                 </div>
             </div>
 
             <!-- نتيجة القسم المستقلة -->
-            <div id="result-match" class="hidden mb-6 bg-blue-50 p-5 rounded-2xl text-center font-bold text-blue-800 border-2 border-blue-200 text-2xl md:text-3xl shadow-sm"></div>
+            <div id="result-match" class="hidden mb-6 bg-blue-50 p-6 rounded-3xl text-center font-bold text-blue-800 border-2 border-blue-200 text-2xl md:text-3xl shadow-sm"></div>
 
-            <div class="mt-8 flex justify-between items-center gap-4 flex-wrap">
-                <button onclick="resetSection('section-match', initMatch)" class="px-6 py-3 bg-slate-100 text-slate-700 font-bold rounded-xl transition text-lg md:text-xl flex-1 md:flex-none">إعادة المحاولة</button>
-                <button onclick="showFinalResult()" class="px-8 py-3 bg-emerald-600 text-white font-bold rounded-xl shadow-md transition text-lg md:text-xl flex-1 md:flex-none">إنهاء وعرض النتيجة</button>
+            <div class="mt-8 flex justify-between items-stretch gap-4 flex-wrap">
+                <button onclick="resetSection('section-match', initMatch)" class="px-6 py-4 bg-slate-100 text-slate-700 font-bold rounded-2xl transition text-lg md:text-xl flex-1 md:flex-none">إعادة المحاولة</button>
+                <button onclick="showFinalResult()" class="px-8 py-4 bg-emerald-600 text-white font-bold rounded-2xl shadow-md transition text-lg md:text-xl flex-1 md:flex-none">إنهاء وعرض النتيجة</button>
             </div>
         </section>
 
         <!-- قسم: النتيجة النهائية -->
         <section id="section-result" class="content-section scroll-mt-custom hidden">
-            <div class="text-center mb-8 bg-white p-4 rounded-2xl border border-blue-100 shadow-sm">
+            <div class="text-center mb-8 bg-white p-5 rounded-3xl border border-blue-100 shadow-sm">
                 <h1 class="text-3xl md:text-4xl font-bold text-blue-900 leading-snug">دلالات المصادر الثلاثية</h1>
             </div>
             
-            <div class="bg-white p-8 rounded-3xl border border-emerald-100 shadow-lg text-center animate-fade-in">
-                <div class="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6 shrink-0">
-                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div class="bg-white p-8 md:p-12 rounded-3xl border border-emerald-100 shadow-lg text-center animate-fade-in">
+                <div class="w-24 h-24 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-8 shrink-0">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                 </div>
-                <h2 class="text-4xl font-bold text-slate-800 mb-2">اكتملت التدريبات!</h2>
-                <p class="text-xl text-slate-500 mb-8">إليك ملخص أدائك في جميع الأقسام:</p>
+                <h2 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">اكتملت التدريبات!</h2>
+                <p class="text-xl md:text-2xl text-slate-500 mb-10">إليك ملخص أدائك في جميع الأقسام:</p>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 text-right">
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <span class="block text-lg text-slate-500 mb-1">اختيار من متعدد</span>
-                        <span id="score-mcq" class="text-3xl font-bold text-blue-600">٠ / ٨</span>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-10 text-right">
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col items-center sm:items-start">
+                        <span class="block text-lg md:text-xl text-slate-500 mb-2">اختيار من متعدد</span>
+                        <span id="score-mcq" class="text-3xl md:text-4xl font-bold text-blue-600">٠ / ٨</span>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <span class="block text-lg text-slate-500 mb-1">صواب أم خطأ</span>
-                        <span id="score-tf" class="text-3xl font-bold text-blue-600">٠ / ٨</span>
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col items-center sm:items-start">
+                        <span class="block text-lg md:text-xl text-slate-500 mb-2">صواب أم خطأ</span>
+                        <span id="score-tf" class="text-3xl md:text-4xl font-bold text-blue-600">٠ / ٨</span>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <span class="block text-lg text-slate-500 mb-1">التصنيف</span>
-                        <span id="score-classify" class="text-3xl font-bold text-blue-600">٠ / ٨</span>
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col items-center sm:items-start">
+                        <span class="block text-lg md:text-xl text-slate-500 mb-2">التصنيف</span>
+                        <span id="score-classify" class="text-3xl md:text-4xl font-bold text-blue-600">٠ / ٨</span>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
-                        <span class="block text-lg text-slate-500 mb-1">التوصيل</span>
-                        <span id="score-match" class="text-3xl font-bold text-blue-600">٠ / ٨</span>
+                    <div class="bg-slate-50 p-5 rounded-2xl border border-slate-100 flex flex-col items-center sm:items-start">
+                        <span class="block text-lg md:text-xl text-slate-500 mb-2">التوصيل</span>
+                        <span id="score-match" class="text-3xl md:text-4xl font-bold text-blue-600">٠ / ٨</span>
                     </div>
                 </div>
 
-                <div class="bg-blue-50 border border-blue-100 p-6 rounded-2xl">
-                    <span class="block text-xl text-blue-800 font-bold mb-2">النتيجة الإجمالية</span>
-                    <span id="score-total" class="text-5xl font-bold text-blue-700">٠ / ٣٢</span>
-                    <p id="result-message" class="mt-3 text-xl text-blue-600 font-medium"></p>
+                <div class="bg-blue-50 border border-blue-100 p-8 rounded-3xl">
+                    <span class="block text-xl md:text-2xl text-blue-800 font-bold mb-4">النتيجة الإجمالية</span>
+                    <span id="score-total" class="text-5xl md:text-6xl font-bold text-blue-700 block">٠ / ٣٢</span>
+                    <p id="result-message" class="mt-6 text-xl md:text-2xl text-blue-600 font-medium leading-relaxed"></p>
                 </div>
             </div>
         </section>
@@ -329,7 +337,7 @@
 
     <!-- التذييل -->
     <footer class="mt-12 py-10 text-center">
-        <a href="https://www.youtube.com/egysalah" target="_blank" rel="noopener noreferrer" class="text-slate-400 text-base font-medium inline-block w-full">
+        <a href="https://www.youtube.com/egysalah" target="_blank" rel="noopener noreferrer" class="text-slate-400 text-lg font-medium inline-block w-full">
             جميع الحقوق محفوظة لقناة العربية السهلة
         </a>
     </footer>
@@ -487,30 +495,30 @@
             container.innerHTML = '';
             document.getElementById('result-mcq').classList.add('hidden');
             
-            let currentData = [...dataMCQ]; // الأسئلة بترتيبها
+            let currentData = [...dataMCQ]; 
             
             currentData.forEach((item, idx) => {
                 let optionsHtml = shuffleArray([...item.options]).map(opt => `
                     <button onclick="checkMCQ(this, '${opt}', '${item.answer}', ${idx})" 
-                            class="mcq-btn-${idx} btn-option w-full md:w-auto flex-1 bg-white border-2 border-slate-200 text-slate-700 font-bold py-4 px-5 rounded-xl text-xl md:text-2xl text-right md:text-center focus:outline-none leading-relaxed">
+                            class="mcq-btn-${idx} btn-option w-full md:w-auto flex-1 bg-white border-2 border-slate-200 text-slate-700 font-bold py-4 px-6 rounded-2xl text-xl md:text-2xl text-right md:text-center focus:outline-none leading-relaxed">
                         ${opt}
                     </button>
                 `).join('');
 
                 container.innerHTML += `
-                    <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                        <div class="flex flex-col sm:flex-row justify-between items-start mb-5 gap-3">
-                            <h3 class="text-2xl md:text-3xl font-bold text-slate-800 leading-relaxed"><span class="text-blue-600 mr-1">السؤال ${toArabicNum(idx + 1)}:</span> ${item.q}</h3>
-                            <button onclick="toggleHint('hint-mcq-${idx}')" class="flex items-center gap-1 text-amber-600 bg-amber-50 transition px-4 py-2 rounded-lg text-lg md:text-xl font-bold whitespace-nowrap focus:outline-none border border-amber-200 self-end sm:self-start shrink-0">
+                    <div class="bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
+                            <h3 class="text-2xl md:text-3xl font-bold text-slate-800 leading-relaxed"><span class="text-blue-600 mr-2">السؤال ${toArabicNum(idx + 1)}:</span> ${item.q}</h3>
+                            <button onclick="toggleHint('hint-mcq-${idx}')" class="flex items-center gap-2 text-amber-600 bg-amber-50 px-4 py-2.5 rounded-xl text-lg md:text-xl font-bold whitespace-nowrap focus:outline-none border border-amber-200 self-end sm:self-start shrink-0">
                                 <span>💡 تلميح</span>
                             </button>
                         </div>
-                        <p id="hint-mcq-${idx}" class="hidden text-xl text-amber-800 bg-amber-50 p-4 rounded-xl border border-amber-200 mb-5 animate-fade-in leading-relaxed font-medium">💡 ${item.hint}</p>
+                        <p id="hint-mcq-${idx}" class="hidden text-xl md:text-2xl text-amber-800 bg-amber-50 p-5 rounded-2xl border border-amber-200 mb-6 animate-fade-in leading-relaxed font-medium">💡 ${item.hint}</p>
                         
-                        <div class="flex flex-col md:flex-row gap-4">
+                        <div class="flex flex-col md:flex-row gap-5">
                             ${optionsHtml}
                         </div>
-                        <div id="mcq-feedback-${idx}" class="hidden mt-5 p-4 rounded-xl text-xl font-bold animate-fade-in"></div>
+                        <div id="mcq-feedback-${idx}" class="hidden mt-6 p-5 rounded-2xl text-xl md:text-2xl font-bold animate-fade-in leading-relaxed"></div>
                     </div>
                 `;
             });
@@ -533,7 +541,7 @@
                 btnEl.classList.replace('bg-white', 'bg-emerald-50');
                 btnEl.classList.remove('opacity-70');
                 feedbackEl.innerHTML = `✔ إجابة صواب: ${expl}`;
-                feedbackEl.className = "mt-5 p-4 rounded-xl text-xl font-bold animate-fade-in bg-emerald-50 text-emerald-700 border border-emerald-200";
+                feedbackEl.className = "mt-6 p-5 rounded-2xl text-xl md:text-2xl font-bold animate-fade-in bg-emerald-50 text-emerald-700 border border-emerald-200 leading-relaxed";
             } else {
                 btnEl.classList.replace('border-slate-200', 'border-rose-500');
                 btnEl.classList.replace('text-slate-700', 'text-rose-700');
@@ -547,7 +555,7 @@
                     }
                 });
                 feedbackEl.innerHTML = `✖ إجابة خاطئة: ${expl}`;
-                feedbackEl.className = "mt-5 p-4 rounded-xl text-xl font-bold animate-fade-in bg-rose-50 text-rose-700 border border-rose-200";
+                feedbackEl.className = "mt-6 p-5 rounded-2xl text-xl md:text-2xl font-bold animate-fade-in bg-rose-50 text-rose-700 border border-rose-200 leading-relaxed";
             }
             
             state.mcq.answered++;
@@ -565,33 +573,32 @@
             container.innerHTML = '';
             document.getElementById('result-tf').classList.add('hidden');
             
-            let currentData = [...dataTF]; // الأسئلة بترتيبها
+            let currentData = [...dataTF];
             
             currentData.forEach((item, idx) => {
-                // ترتيب ثابت: صواب ثم خطأ
                 let opts = [
                     { label: 'صواب', val: true },
                     { label: 'خطأ', val: false }
                 ];
                 
                 let optionsHtml = opts.map(opt => `
-                    <button onclick="checkTF(this, ${opt.val}, ${item.answer}, ${idx})" class="tf-btn-${idx} btn-option flex-1 bg-white border-2 border-slate-200 text-slate-700 font-bold py-4 px-5 rounded-xl text-xl md:text-2xl focus:outline-none">${opt.label}</button>
+                    <button onclick="checkTF(this, ${opt.val}, ${item.answer}, ${idx})" class="tf-btn-${idx} btn-option flex-1 bg-white border-2 border-slate-200 text-slate-700 font-bold py-4 px-6 rounded-2xl text-xl md:text-2xl focus:outline-none leading-relaxed">${opt.label}</button>
                 `).join('');
 
                 container.innerHTML += `
-                    <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden">
-                        <div class="flex flex-col sm:flex-row justify-between items-start mb-5 gap-3">
-                            <h3 class="text-2xl md:text-3xl font-bold text-slate-800 leading-relaxed"><span class="text-blue-600 mr-1">السؤال ${toArabicNum(idx + 1)}:</span> ${item.q}</h3>
-                            <button onclick="toggleHint('hint-tf-${idx}')" class="flex items-center gap-1 text-amber-600 bg-amber-50 transition px-4 py-2 rounded-lg text-lg md:text-xl font-bold whitespace-nowrap focus:outline-none border border-amber-200 self-end sm:self-start shrink-0">
+                    <div class="bg-white p-6 md:p-10 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden">
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
+                            <h3 class="text-2xl md:text-3xl font-bold text-slate-800 leading-relaxed"><span class="text-blue-600 mr-2">السؤال ${toArabicNum(idx + 1)}:</span> ${item.q}</h3>
+                            <button onclick="toggleHint('hint-tf-${idx}')" class="flex items-center gap-2 text-amber-600 bg-amber-50 transition px-4 py-2.5 rounded-xl text-lg md:text-xl font-bold whitespace-nowrap focus:outline-none border border-amber-200 self-end sm:self-start shrink-0">
                                 <span>💡 تلميح</span>
                             </button>
                         </div>
-                        <p id="hint-tf-${idx}" class="hidden text-xl text-amber-800 bg-amber-50 p-4 rounded-xl border border-amber-200 mb-5 animate-fade-in leading-relaxed font-medium">💡 ${item.hint}</p>
+                        <p id="hint-tf-${idx}" class="hidden text-xl md:text-2xl text-amber-800 bg-amber-50 p-5 rounded-2xl border border-amber-200 mb-6 animate-fade-in leading-relaxed font-medium">💡 ${item.hint}</p>
                         
-                        <div class="flex gap-4">
+                        <div class="flex flex-col sm:flex-row gap-5">
                             ${optionsHtml}
                         </div>
-                        <div id="tf-feedback-${idx}" class="hidden mt-5 p-4 rounded-xl text-xl font-bold animate-fade-in"></div>
+                        <div id="tf-feedback-${idx}" class="hidden mt-6 p-5 rounded-2xl text-xl md:text-2xl font-bold animate-fade-in leading-relaxed"></div>
                     </div>
                 `;
             });
@@ -614,7 +621,7 @@
                 btnEl.classList.replace('bg-white', 'bg-emerald-50');
                 btnEl.classList.remove('opacity-70');
                 feedbackEl.innerHTML = `✔ أحسنت: ${expl}`;
-                feedbackEl.className = "mt-5 p-4 rounded-xl text-xl font-bold animate-fade-in bg-emerald-50 text-emerald-700 border border-emerald-200";
+                feedbackEl.className = "mt-6 p-5 rounded-2xl text-xl md:text-2xl font-bold animate-fade-in bg-emerald-50 text-emerald-700 border border-emerald-200 leading-relaxed";
             } else {
                 btnEl.classList.replace('border-slate-200', 'border-rose-500');
                 btnEl.classList.replace('text-slate-700', 'text-rose-700');
@@ -628,7 +635,7 @@
                 }
                 
                 feedbackEl.innerHTML = `✖ انتبه: ${expl}`;
-                feedbackEl.className = "mt-5 p-4 rounded-xl text-xl font-bold animate-fade-in bg-rose-50 text-rose-700 border border-rose-200";
+                feedbackEl.className = "mt-6 p-5 rounded-2xl text-xl md:text-2xl font-bold animate-fade-in bg-rose-50 text-rose-700 border border-rose-200 leading-relaxed";
             }
             
             state.tf.answered++;
@@ -651,18 +658,18 @@
             document.getElementById('result-classify').classList.add('hidden');
             pool.innerHTML = ''; cats.innerHTML = '';
             
-            let shuffledWords = shuffleArray([...dataClassifyWords]); // الكلمات هي الاختيارات لذا يتم خلطها
+            let shuffledWords = shuffleArray([...dataClassifyWords]);
             
             shuffledWords.forEach((item, idx) => {
-                pool.innerHTML += `<button id="cw-${idx}" onclick="selectWordToClassify(this, '${item.word}', '${item.cat}', '${item.expl}')" class="btn-option bg-white border-2 border-indigo-200 text-indigo-800 px-5 py-3 rounded-xl font-bold text-xl md:text-2xl shadow-sm transition">${item.word}</button>`;
+                pool.innerHTML += `<button id="cw-${idx}" onclick="selectWordToClassify(this, '${item.word}', '${item.cat}', '${item.expl}')" class="btn-option bg-white border-2 border-indigo-200 text-indigo-800 px-6 py-3.5 rounded-2xl font-bold text-xl md:text-2xl shadow-sm transition">${item.word}</button>`;
             });
 
             dataClassifyCats.forEach(cat => {
-                // min-h-[8rem] للتجاوب مع تكبير النصوص
+                // min-h-[8rem] 
                 cats.innerHTML += `
-                    <div onclick="attemptClassify('${cat}')" class="bg-slate-50 rounded-xl p-4 text-center border-2 border-dashed border-slate-300 cursor-pointer transition min-h-[8rem] flex flex-col">
-                        <span class="font-bold text-slate-800 mb-3 block border-b border-slate-200 pb-2 text-xl md:text-2xl">${cat}</span>
-                        <div id="cat-box-${cat}" class="flex-1 flex flex-col gap-2 justify-center"></div>
+                    <div onclick="attemptClassify('${cat}')" class="bg-slate-50 rounded-2xl p-5 text-center border-2 border-dashed border-slate-300 cursor-pointer transition min-h-[8rem] flex flex-col">
+                        <span class="font-bold text-slate-800 mb-4 block border-b border-slate-200 pb-3 text-xl md:text-2xl">${cat}</span>
+                        <div id="cat-box-${cat}" class="flex-1 flex flex-col gap-3 justify-center"></div>
                     </div>
                 `;
             });
@@ -688,11 +695,11 @@
 
             if (data.correctCat === targetCat) {
                 state.classify.score++;
-                document.getElementById(`cat-box-${targetCat}`).innerHTML += `<span class="bg-emerald-100 text-emerald-800 text-lg md:text-xl font-bold py-1.5 px-3 rounded block animate-fade-in">${data.word}</span>`;
+                document.getElementById(`cat-box-${targetCat}`).innerHTML += `<span class="bg-emerald-100 text-emerald-800 text-lg md:text-xl font-bold py-2 px-4 rounded-xl block animate-fade-in">${data.word}</span>`;
                 data.btn.remove();
                 
                 feedback.innerHTML = `✔ إجابة صواب: (${data.word}) تدل على ${targetCat} لأنها ${data.expl}.`;
-                feedback.className = "mb-6 text-center text-xl font-bold p-4 rounded-xl animate-fade-in bg-emerald-50 text-emerald-700 border border-emerald-200";
+                feedback.className = "mb-8 text-center text-xl md:text-2xl font-bold p-5 rounded-2xl animate-fade-in bg-emerald-50 text-emerald-700 border border-emerald-200 leading-relaxed";
                 
                 state.classify.answered++;
                 updateProgress();
@@ -702,7 +709,7 @@
                 }
             } else {
                 feedback.innerHTML = `✖ إجابة خاطئة: حاول إيجاد دلالة (${data.word}) الصحيحة بناءً على وزنها.`;
-                feedback.className = "mb-6 text-center text-xl font-bold p-4 rounded-xl animate-fade-in bg-rose-50 text-rose-700 border border-rose-200 animate-shake";
+                feedback.className = "mb-8 text-center text-xl md:text-2xl font-bold p-5 rounded-2xl animate-fade-in bg-rose-50 text-rose-700 border border-rose-200 animate-shake leading-relaxed";
                 data.btn.classList.remove('bg-indigo-600', 'text-white', 'border-indigo-600');
                 data.btn.classList.add('bg-white', 'text-indigo-800', 'border-indigo-200');
             }
@@ -722,15 +729,15 @@
             document.getElementById('result-match').classList.add('hidden');
             colS.innerHTML = ''; colM.innerHTML = '';
 
-            let currentS = [...dataMatch]; // العمود الأول غير مخلط
-            let shuffledM = shuffleArray([...dataMatch]); // العمود الثاني (الخيارات) مخلط
+            let currentS = [...dataMatch]; 
+            let shuffledM = shuffleArray([...dataMatch]); 
 
             currentS.forEach((item, idx) => {
-                colS.innerHTML += `<button id="ms-${idx}" onclick="selectMatchPair('source', this, '${item.s}', '${item.m}')" class="btn-option bg-white border-2 border-teal-200 text-teal-800 px-5 py-4 rounded-xl font-bold text-xl md:text-2xl shadow-sm transition text-right md:text-center">${item.s}</button>`;
+                colS.innerHTML += `<button id="ms-${idx}" onclick="selectMatchPair('source', this, '${item.s}', '${item.m}')" class="btn-option bg-white border-2 border-teal-200 text-teal-800 px-6 py-5 rounded-2xl font-bold text-xl md:text-2xl shadow-sm transition text-right md:text-center leading-relaxed">${item.s}</button>`;
             });
 
             shuffledM.forEach((item, idx) => {
-                colM.innerHTML += `<button id="mm-${idx}" onclick="selectMatchPair('meaning', this, '${item.m}', '${item.m}')" class="btn-option bg-white border-2 border-orange-200 text-orange-800 px-5 py-4 rounded-xl font-bold text-xl md:text-2xl shadow-sm transition text-right md:text-center">${item.m}</button>`;
+                colM.innerHTML += `<button id="mm-${idx}" onclick="selectMatchPair('meaning', this, '${item.m}', '${item.m}')" class="btn-option bg-white border-2 border-orange-200 text-orange-800 px-6 py-5 rounded-2xl font-bold text-xl md:text-2xl shadow-sm transition text-right md:text-center leading-relaxed">${item.m}</button>`;
             });
             updateProgress();
         }
@@ -769,11 +776,11 @@
                     state.match.score++;
                     
                     s.btn.disabled = true; m.btn.disabled = true;
-                    s.btn.className = "bg-emerald-100 text-emerald-800 border-2 border-emerald-300 px-5 py-4 rounded-xl font-bold text-xl md:text-2xl opacity-60";
-                    m.btn.className = "bg-emerald-100 text-emerald-800 border-2 border-emerald-300 px-5 py-4 rounded-xl font-bold text-xl md:text-2xl opacity-60";
+                    s.btn.className = "bg-emerald-100 text-emerald-800 border-2 border-emerald-300 px-6 py-5 rounded-2xl font-bold text-xl md:text-2xl opacity-60 leading-relaxed";
+                    m.btn.className = "bg-emerald-100 text-emerald-800 border-2 border-emerald-300 px-6 py-5 rounded-2xl font-bold text-xl md:text-2xl opacity-60 leading-relaxed";
                     
                     feedback.innerHTML = `✔ أحسنت: (${s.text}) تدل على ${m.text}.`;
-                    feedback.className = "mb-6 text-center text-xl font-bold p-4 rounded-xl animate-fade-in bg-emerald-50 text-emerald-700 border border-emerald-200";
+                    feedback.className = "mb-8 text-center text-xl md:text-2xl font-bold p-5 rounded-2xl animate-fade-in bg-emerald-50 text-emerald-700 border border-emerald-200 leading-relaxed";
                     
                     state.match.answered++;
                     updateProgress();
@@ -783,7 +790,7 @@
                     }
                 } else {
                     feedback.innerHTML = `✖ إجابة خاطئة: الدلالة غير متطابقة.`;
-                    feedback.className = "mb-6 text-center text-xl font-bold p-4 rounded-xl bg-rose-50 text-rose-700 border border-rose-200 animate-shake";
+                    feedback.className = "mb-8 text-center text-xl md:text-2xl font-bold p-5 rounded-2xl bg-rose-50 text-rose-700 border border-rose-200 animate-shake leading-relaxed";
                     
                     s.btn.classList.remove('bg-teal-600', 'text-white', 'border-teal-600');
                     s.btn.classList.add('bg-white', 'text-teal-800', 'border-teal-200');
